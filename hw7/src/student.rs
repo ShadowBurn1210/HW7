@@ -4,11 +4,10 @@ use bevy::prelude::*;
 use crate::asset_loader::SceneAssets;
 use crate::asteroids::Asteroid;
 use crate::collision_detection::Collider;
-use crate::{db};
+use crate::Score;
 
 use crate::movement::*;
 use crate::plant::Plant;
-use crate::score::Score;
 
 const STARTING_TRANSLATION: Vec3 = Vec3::new(0.0, 0.0, -20.0);
 const SPACESHIP_SPEED: f32 = 25.0;
@@ -136,17 +135,6 @@ fn handle_astronaut_collisions(
                 println!("Astronaut collided with asteroid! Asteroid collision");
                 score.lives -= 1;
                 println!("Lives: {}", score.lives);
-                if score.lives <= 0 {
-                    println!("Game Over, you got {} points", score.value);
-
-                    Command::new("sh")
-                        .arg("-c")
-                        .arg("echo 'Game Over' | festival --tts")
-                        .spawn()
-                        .expect("failed to execute process");
-                    std::process::exit(0);
-
-                }
 
             }
         }

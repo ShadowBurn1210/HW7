@@ -1,7 +1,7 @@
 use bevy::reflect::erased_serde::__private::serde::de::Unexpected::Str;
 use sqlx::{postgres::PgPoolOptions, PgPool, Error};
-use crate::score::Score;
-
+// use crate::score::Score;
+use crate::Score;
 pub async fn init_db() -> PgPool {
     let url = String::from("postgresql://postgres:Kasjauns2003@localhost:5432/hw7?schema=public");
 
@@ -31,8 +31,7 @@ pub async fn insert_score(
             Score,
             "INSERT INTO High_Scores VALUES ($1, $2) RETURNING *",
             item.value,
-        item.lives,
-
+            item.lives,  // Removed the extra comma here
         )
         .fetch_one(pool)
         .await
@@ -42,3 +41,5 @@ pub async fn insert_score(
     };
     Ok(())
 }
+
+

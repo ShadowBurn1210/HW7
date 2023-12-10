@@ -4,7 +4,8 @@ use rand::Rng;
 use crate::asset_loader::SceneAssets;
 use crate::collision_detection::Collider;
 use crate::movement::{Acceleration, MovingObjectBundle, Velocity};
-use crate::score::Score;
+use crate::Score;
+// use crate::score::Score;
 use crate::student::Bullet;
 
 const VELOCITY_SCALAR: f32 = 5.0;
@@ -85,7 +86,6 @@ fn rotate_asteroids(
 fn handle_asteroid_collisions(
     mut commands: Commands,
     query: Query<(Entity, &Collider), With<Asteroid>>,
-    mut score: ResMut<Score>,
 ) {
     for (entity, collider) in query.iter() {
         for &collided_entity in collider.colliding_entities.iter() {
