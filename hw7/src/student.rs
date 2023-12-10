@@ -137,7 +137,7 @@ fn handle_astronaut_collisions(
                 score.lives -= 1;
                 println!("Lives: {}", score.lives);
                 if score.lives <= 0 {
-                    println!("Game Over");
+                    println!("Game Over, you got {} points", score.value);
 
                     Command::new("sh")
                         .arg("-c")
