@@ -4,6 +4,7 @@ use rand::Rng;
 use crate::asset_loader::SceneAssets;
 use crate::collision_detection::Collider;
 use crate::movement::{Acceleration, MovingObjectBundle, Velocity};
+use crate::score::Score;
 use crate::student::Bullet;
 
 const VELOCITY_SCALAR: f32 = 5.0;
@@ -84,6 +85,7 @@ fn rotate_plant(
 fn handle_plant_collisions(
     mut commands: Commands,
     query: Query<(Entity, &Collider), With<Plant>>,
+    mut score: ResMut<Score>
 ) {
     for (entity, collider) in query.iter() {
         for &collided_entity in collider.colliding_entities.iter() {
@@ -91,7 +93,7 @@ fn handle_plant_collisions(
             if query.get(collided_entity).is_ok() {
                 continue;
             }
-            // Despawn the asteroid.
+
             commands.entity(entity).despawn_recursive();
         }
     }

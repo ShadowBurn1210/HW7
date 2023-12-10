@@ -3,7 +3,7 @@ use sqlx::{postgres::PgPoolOptions, PgPool, Error};
 use crate::score::Score;
 
 pub async fn init_db() -> PgPool {
-    let url = String::from(DATABASE_URL);
+    let url = String::from("postgresql://postgres:Kasjauns2003@localhost:5432/hw7?schema=public");
 
     let pool = match PgPoolOptions::new()
         .max_connections(10)
@@ -23,7 +23,7 @@ pub async fn init_db() -> PgPool {
 }
 
 
-async fn insert_score(
+pub async fn insert_score(
     pool: &PgPool,
     item: Score,
 ) -> Result<(), Error> {

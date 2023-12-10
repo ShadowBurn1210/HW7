@@ -1,4 +1,5 @@
 use bevy::prelude::*;
+use crate::score::Score;
 
 pub struct DebugPlugin;
 
@@ -12,7 +13,7 @@ fn print_position(query: Query<(Entity, &Transform)>) {
     // Log the entity ID and translation of each entity with a `Position` component.
     for (entity, transform) in query.iter() {
         info!(
-            "Entity {:?} is at position {:?},",
+            "Entity {:?} is at position {:?}",
             entity, transform.translation
         );
     }
